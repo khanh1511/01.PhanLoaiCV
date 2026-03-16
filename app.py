@@ -10,7 +10,8 @@ st.set_page_config(page_title="Phân loại công việc xây dựng", layout="w
 
 @st.cache_data
 def load_excel(file):
-    return pd.read_excel(file)
+    # Chỉ đọc file Excel định dạng .xlsx với engine openpyxl
+    return pd.read_excel(file, engine="openpyxl")
 
 
 def clean_text(text: str) -> str:
@@ -166,7 +167,7 @@ def main():
     )
 
     uploaded_file = st.file_uploader(
-        "Chọn file Excel (.xlsx, .xls)", type=["xlsx", "xls"]
+        "Chọn file Excel (.xlsx)", type=["xlsx"]
     )
 
     if not uploaded_file:
